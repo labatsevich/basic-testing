@@ -2,42 +2,40 @@
 import { simpleCalculator, Action } from './index';
 
 describe('simpleCalculator tests', () => {
+  const a = 9;
+  const b = 6;
   test('should add two numbers', () => {
-    const result = simpleCalculator({ a: 2, b: 7, action: Action.Add });
-    expect(result).toBe(9);
+    const result = a + b;
+    expect(simpleCalculator({ a, b, action: Action.Add })).toBe(result);
   });
 
   test('should subtract two numbers', () => {
-    const result = simpleCalculator({ a: 5, b: 4, action: Action.Subtract });
-    expect(result).toBe(1);
+    const result = a - b;
+    expect(simpleCalculator({ a, b, action: Action.Subtract })).toBe(result);
   });
 
   test('should multiply two numbers', () => {
-    const result = simpleCalculator({ a: 15, b: 15, action: Action.Multiply });
-    expect(result).toBe(225);
+    const result = a * b;
+    expect(simpleCalculator({ a, b, action: Action.Multiply })).toBe(result);
   });
 
   test('should divide two numbers', () => {
-    const result = simpleCalculator({ a: 81, b: 9, action: Action.Divide });
-    expect(result).toBe(9);
+    const result = a / b;
+    expect(simpleCalculator({ a, b, action: Action.Divide })).toBe(result);
   });
 
   test('should exponentiate two numbers', () => {
-    const result = simpleCalculator({
-      a: 4,
-      b: 3,
-      action: Action.Exponentiate,
-    });
-    expect(result).toBe(64);
+    const result = Math.pow(a, b);
+    expect(simpleCalculator({ a, b, action: Action.Exponentiate })).toBe(
+      result,
+    );
   });
 
   test('should return null for invalid action', () => {
-    const result = simpleCalculator({ a: 5, b: 4, action: undefined });
-    expect(result).toBeNull();
+    expect(simpleCalculator({ a: 5, b: 4, action: 'bla' })).toBe(null);
   });
 
   test('should return null for invalid arguments', () => {
-    const result = simpleCalculator({ a: 5, b: { b: 2 }, action: Action.Add });
-    expect(result).toBeNull();
+    expect(simpleCalculator({ a, b: { b: 2 }, action: Action.Add })).toBe(null);
   });
 });
